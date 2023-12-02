@@ -2,7 +2,7 @@
 file_path = './2_data.txt'
 
 # Pt 1
-valid_games = []
+valid_games_sum = 0
 with open(file_path, 'r') as file:
     file_contents = file.read()
     for line in file_contents.splitlines():
@@ -22,18 +22,18 @@ with open(file_path, 'r') as file:
                 elif color == "red" and num > 12:
                     valid = False
         if valid:
-            valid_games.append(game_number)
-    print("Part 1: " + str(sum(valid_games)))
+            valid_games_sum += game_number
+    print("Part 1: " + str(valid_games_sum))
 
 
 # Pt 2
-powers = []
+powers_sum = 0
 with open(file_path, 'r') as file:
     file_contents = file.read()
     for line in file_contents.splitlines():
-        game_number, turns = line.split(":")
+        game_number, turns_raw = line.split(":")
         game_number = int(game_number.strip("Game "))
-        turns = turns.split(";")
+        turns = turns_raw.split(";")
         red_counts = []
         green_counts = []
         blue_counts = []
@@ -48,8 +48,7 @@ with open(file_path, 'r') as file:
                     green_counts.append(num)
                 elif color == "red":
                     red_counts.append(num)
-        power = max(red_counts) * max(green_counts) * max(blue_counts)
-        powers.append(power)
-    print("Part 2: " + str(sum(powers)))
+        powers_sum += max(red_counts) * max(green_counts) * max(blue_counts)
+    print("Part 2: " + str(powers_sum))
                     
             
